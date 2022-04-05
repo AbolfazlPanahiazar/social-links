@@ -26,13 +26,13 @@ import {
   input,
   cancellButton,
   selectFormControl,
-} from "./addForm.styles";
+} from "./editForm.styles";
 
-const AddForm: FC = () => {
+const EditForm: FC = () => {
   return (
     <Paper sx={root}>
       <Box sx={rightTitles}>
-        <Typography>افزودن مسیر های ارتباطی</Typography>
+        <Typography>ویرایش مسیر ارتباطی</Typography>
       </Box>
       <Box sx={inputsContainer}>
         <FormControl sx={selectFormControl}>
@@ -66,7 +66,7 @@ const AddForm: FC = () => {
       </Box>
       <Box mt={2}>
         <Button variant="contained" color="warning">
-          ثبت مسیر ارتباطی
+          ویرایش مسیر ارتباطی
         </Button>
         <Button variant="outlined" sx={cancellButton}>
           انصراف
@@ -76,4 +76,4 @@ const AddForm: FC = () => {
   );
 };
 
-export default AddForm;
+export default EditForm;

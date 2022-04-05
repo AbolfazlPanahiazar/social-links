@@ -12,6 +12,7 @@ import {
   primaryText,
 } from "./panel.styles";
 import AddForm from "components/AddForm/AddForm";
+import EditForm from "components/EditForm/EditForm";
 import SocialLinkItem from "components/SocialLinkItem/SocialLinkItem";
 
 const Panel: FC = () => {
@@ -62,6 +63,7 @@ const Panel: FC = () => {
             </Typography>
           </Box>
           <AddForm />
+          <EditForm />
           <Box mt={3}>
             <SocialLinkItem />
           </Box>
