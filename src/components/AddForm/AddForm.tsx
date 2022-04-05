@@ -10,14 +10,7 @@ import {
   InputLabel,
   MenuItem,
 } from "@mui/material";
-import {
-  Twitter,
-  Instagram,
-  Facebook,
-  Web,
-  LinkedIn,
-  Telegram,
-} from "@mui/icons-material";
+import { useFormik } from "formik";
 
 import {
   root,
@@ -28,7 +21,22 @@ import {
   selectFormControl,
 } from "./addForm.styles";
 
+interface IFormValues {
+  add_type: string;
+  add_url: string;
+  add_id: string;
+}
+
 const AddForm: FC = () => {
+  const formik = useFormik({
+    initialValues: {
+      add_type: "",
+      add_url: "",
+      add_id: "",
+    },
+    onSubmit: (values: IFormValues) => {},
+  });
+
   return (
     <Paper sx={root}>
       <Box sx={rightTitles}>
@@ -38,10 +46,12 @@ const AddForm: FC = () => {
         <FormControl sx={selectFormControl}>
           <InputLabel id="select-label">نوع*</InputLabel>
           <Select
+            name="add_type"
             color="primary"
             labelId="select-label"
             label="نوع*"
-            IconComponent={Twitter}
+            value={formik.values.add_type}
+            onChange={formik.handleChange}
           >
             <MenuItem value="instagram">اینستاگرام</MenuItem>
             <MenuItem value="facebook">فیسبوک</MenuItem>
@@ -52,16 +62,22 @@ const AddForm: FC = () => {
           </Select>
         </FormControl>
         <TextField
+          name="add_url"
           color="secondary"
           sx={input}
           variant="outlined"
           label="لینک"
+          value={formik.values.add_url}
+          onChange={formik.handleChange}
         />
         <TextField
+          name="add_id"
           color="secondary"
           sx={input}
           variant="outlined"
           label="(ID) آی دی"
+          value={formik.values.add_id}
+          onChange={formik.handleChange}
         />
       </Box>
       <Box mt={2}>

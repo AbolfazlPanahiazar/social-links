@@ -10,14 +10,7 @@ import {
   InputLabel,
   MenuItem,
 } from "@mui/material";
-import {
-  Twitter,
-  Instagram,
-  Facebook,
-  Web,
-  LinkedIn,
-  Telegram,
-} from "@mui/icons-material";
+import { useFormik } from "formik";
 
 import {
   root,
@@ -28,7 +21,22 @@ import {
   selectFormControl,
 } from "./editForm.styles";
 
+interface IFormValues {
+  edit_type: string;
+  edit_url: string;
+  edit_id: string;
+}
+
 const EditForm: FC = () => {
+  const formik = useFormik({
+    initialValues: {
+      edit_type: "",
+      edit_url: "",
+      edit_id: "",
+    },
+    onSubmit: (values: IFormValues) => {},
+  });
+
   return (
     <Paper sx={root}>
       <Box sx={rightTitles}>
@@ -38,10 +46,12 @@ const EditForm: FC = () => {
         <FormControl sx={selectFormControl}>
           <InputLabel id="select-label">نوع*</InputLabel>
           <Select
+            name="edit_type"
             color="primary"
             labelId="select-label"
             label="نوع*"
-            IconComponent={Twitter}
+            value={formik.values.edit_type}
+            onChange={formik.handleChange}
           >
             <MenuItem value="instagram">اینستاگرام</MenuItem>
             <MenuItem value="facebook">فیسبوک</MenuItem>
@@ -52,16 +62,22 @@ const EditForm: FC = () => {
           </Select>
         </FormControl>
         <TextField
+          name="edit_url"
           color="secondary"
           sx={input}
           variant="outlined"
           label="لینک"
+          value={formik.values.edit_url}
+          onChange={formik.handleChange}
         />
         <TextField
+          name="edit_id"
           color="secondary"
           sx={input}
           variant="outlined"
           label="(ID) آی دی"
+          value={formik.values.edit_id}
+          onChange={formik.handleChange}
         />
       </Box>
       <Box mt={2}>
