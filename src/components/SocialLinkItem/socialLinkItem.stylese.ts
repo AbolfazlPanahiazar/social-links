@@ -7,11 +7,17 @@ export const root: SxProps<Theme> = (theme: Theme) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+  },
 });
 
 export const wrapper: SxProps<Theme> = (theme: Theme) => ({
   display: "flex",
   alignItems: "center",
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+  },
 });
 
 export const text: SxProps<Theme> = (theme: Theme) => ({
@@ -29,4 +35,14 @@ export const editButton: SxProps<Theme> = (theme: Theme) => ({
 
 export const deleteButton: SxProps<Theme> = (theme: Theme) => ({
   color: theme.palette.error.main,
+});
+
+export const keyValueWrapper: SxProps<Theme> = (theme: Theme) => ({
+  display: "flex",
+  marginLeft: 2,
+});
+
+export const buttonsWrapper: SxProps<Theme> = (theme: Theme) => ({
+  display: "flex",
+  alignItems: "center",
 });

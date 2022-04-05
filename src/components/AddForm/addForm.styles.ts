@@ -17,6 +17,9 @@ export const inputsContainer: SxProps<Theme> = (theme: Theme) => ({
   justifyContent: "space-around",
   alignItems: "center",
   marginTop: 1,
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+  },
 });
 
 export const input: SxProps<Theme> = (theme: Theme) => ({
@@ -24,6 +27,10 @@ export const input: SxProps<Theme> = (theme: Theme) => ({
   margin: "0 10px",
   flexGrow: 1,
   borderColor: "grey",
+  [theme.breakpoints.down("sm")]: {
+    margin: "10px",
+    width: "100%",
+  },
 });
 
 export const cancellButton: SxProps<Theme> = (theme: Theme) => ({
@@ -33,6 +40,6 @@ export const cancellButton: SxProps<Theme> = (theme: Theme) => ({
 });
 
 export const selectFormControl: SxProps<Theme> = (theme: Theme) => ({
-  minWidth: 250,
   margin: "0 10px",
+  maxWidth: 350,
 });

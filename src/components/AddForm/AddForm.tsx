@@ -43,7 +43,7 @@ const AddForm: FC = () => {
         <Typography>افزودن مسیر های ارتباطی</Typography>
       </Box>
       <Box sx={inputsContainer}>
-        <FormControl sx={selectFormControl}>
+        <FormControl sx={selectFormControl} fullWidth>
           <InputLabel id="select-label">نوع*</InputLabel>
           <Select
             name="add_type"

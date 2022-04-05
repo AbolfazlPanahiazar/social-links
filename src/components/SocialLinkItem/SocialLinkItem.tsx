@@ -10,6 +10,8 @@ import {
   text,
   editButton,
   deleteButton,
+  keyValueWrapper,
+  buttonsWrapper,
 } from "./socialLinkItem.stylese";
 
 const SocialLinkItem: FC = () => {
@@ -24,7 +26,7 @@ const SocialLinkItem: FC = () => {
             توییتر
           </Typography>
         </Box>
-        <Box display="flex" ml={2}>
+        <Box sx={keyValueWrapper}>
           <Typography fontSize={14} ml={1} color="GrayText">
             آی دی (ID):
           </Typography>
@@ -32,7 +34,7 @@ const SocialLinkItem: FC = () => {
             @mhosseintaher
           </Typography>
         </Box>
-        <Box display="flex" ml={2}>
+        <Box sx={keyValueWrapper}>
           <Typography fontSize={14} ml={1} color="GrayText">
             لینک:
           </Typography>
@@ -41,7 +43,7 @@ const SocialLinkItem: FC = () => {
           </Typography>
         </Box>
       </Box>
-      <Box sx={wrapper}>
+      <Box sx={buttonsWrapper}>
         <Button sx={editButton}>
           <Edit />
           <Typography fontSize={14}>ویرایش</Typography>

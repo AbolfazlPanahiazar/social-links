@@ -43,7 +43,7 @@ const EditForm: FC = () => {
         <Typography>ویرایش مسیر ارتباطی</Typography>
       </Box>
       <Box sx={inputsContainer}>
-        <FormControl sx={selectFormControl}>
+        <FormControl sx={selectFormControl} fullWidth>
           <InputLabel id="select-label">نوع*</InputLabel>
           <Select
             name="edit_type"
