@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 
+import { addSocial } from "api";
 import {
   root,
   rightTitles,
@@ -38,7 +39,15 @@ const AddForm: FC<IAddFormProps> = ({ collapse }) => {
       add_url: "",
       add_id: "",
     },
-    onSubmit: (values: IFormValues) => {},
+    onSubmit: (values: IFormValues) => {
+      if (values.add_id && values.add_type && values.add_url) {
+        addSocial(values.add_id, values.add_url)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch(() => {});
+      }
+    },
   });
 
   const cancellHandler = () => {
@@ -90,7 +99,11 @@ const AddForm: FC<IAddFormProps> = ({ collapse }) => {
         />
       </Box>
       <Box mt={2}>
-        <Button variant="contained" color="warning">
+        <Button
+          variant="contained"
+          color="warning"
+          onClick={() => formik.submitForm()}
+        >
           ثبت مسیر ارتباطی
         </Button>
         <Button variant="outlined" sx={cancellButton} onClick={cancellHandler}>
