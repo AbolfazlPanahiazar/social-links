@@ -106,6 +106,7 @@ const Panel: FC = () => {
               collapse={() => {
                 setFormState("none");
                 setEditingSocial({ id: "", social_id: "", social_link: "" });
+                fetchSocials();
               }}
               social={editingSocial}
             />

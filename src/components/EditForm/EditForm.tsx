@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 
+import { editSocial } from "api";
 import { socialTypeIdentifier } from "helpers/socialTypeIndentifier";
 import {
   root,
@@ -41,7 +42,18 @@ const EditForm: FC<IEditFormProps> = ({ collapse, social }) => {
       edit_url: social.social_link,
       edit_id: social.social_id,
     },
-    onSubmit: (values: IFormValues) => {},
+    onSubmit: (values: IFormValues) => {
+      if (values.edit_id && values.edit_type && values.edit_url) {
+        editSocial(values.edit_id, values.edit_url, social.id)
+          .then((res) => {
+            formik.resetForm();
+            collapse();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
   });
 
   useEffect(() => {
@@ -96,7 +108,7 @@ const EditForm: FC<IEditFormProps> = ({ collapse, social }) => {
         />
       </Box>
       <Box mt={2}>
-        <Button variant="contained" color="warning">
+        <Button variant="contained" color="warning" onClick={formik.submitForm}>
           ویرایش مسیر ارتباطی
         </Button>
         <Button variant="outlined" sx={cancellButton} onClick={collapse}>

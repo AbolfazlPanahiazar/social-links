@@ -30,9 +30,14 @@ const ConfirmDeleteModal: FC<IConfirmDeleteModalProps> = ({
     },
     onSubmit: (values: IFormValues) => {
       if (values.taeed && values.taeed === "تایید") {
-        deleteSocial(id);
-        close();
-        refetch();
+        deleteSocial(id)
+          .then(() => {
+            close();
+            refetch();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         formik.resetForm();
       }

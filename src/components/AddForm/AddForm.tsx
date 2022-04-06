@@ -46,7 +46,9 @@ const AddForm: FC<IAddFormProps> = ({ collapse }) => {
             formik.resetForm();
             collapse();
           })
-          .catch(() => {});
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
   });
