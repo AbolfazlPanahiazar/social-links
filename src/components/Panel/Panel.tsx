@@ -23,6 +23,11 @@ const Panel: FC = () => {
   const [formState, setFormState] = useState<"add" | "edit" | "none">("none");
   const [socials, setSocials] = useState<ISocial[]>([]);
   const [deletingSocial, setDeletingSocial] = useState<ISocial | null>(null);
+  const [editingSocial, setEditingSocial] = useState<ISocial>({
+    id: "",
+    social_id: "",
+    social_link: "",
+  });
 
   const fetchSocials = () => {
     getSocials()
@@ -92,7 +97,13 @@ const Panel: FC = () => {
             <AddForm collapse={() => setFormState("none")} />
           </Collapse>
           <Collapse in={formState === "edit"}>
-            <EditForm collapse={() => setFormState("none")} />
+            <EditForm
+              collapse={() => {
+                setFormState("none");
+                setEditingSocial({ id: "", social_id: "", social_link: "" });
+              }}
+              social={editingSocial}
+            />
           </Collapse>
           <Box mt={3}>
             {socials.map((i) => (
@@ -101,6 +112,10 @@ const Panel: FC = () => {
                 social={i}
                 onDelete={() => {
                   setDeletingSocial(i);
+                }}
+                onEdit={() => {
+                  setEditingSocial(i);
+                  setFormState("edit");
                 }}
               />
             ))}

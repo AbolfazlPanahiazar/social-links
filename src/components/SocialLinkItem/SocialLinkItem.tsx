@@ -22,9 +22,10 @@ import { ISocial } from "typescript";
 interface ISocialLinkItem {
   social: ISocial;
   onDelete: () => void;
+  onEdit: () => void;
 }
 
-const SocialLinkItem: FC<ISocialLinkItem> = ({ social, onDelete }) => {
+const SocialLinkItem: FC<ISocialLinkItem> = ({ social, onDelete, onEdit }) => {
   return (
     <Paper sx={root}>
       <Box sx={wrapper}>
@@ -56,7 +57,9 @@ const SocialLinkItem: FC<ISocialLinkItem> = ({ social, onDelete }) => {
       <Box sx={buttonsWrapper}>
         <Button sx={editButton}>
           <Edit />
-          <Typography fontSize={14}>ویرایش</Typography>
+          <Typography fontSize={14} onClick={onEdit}>
+            ویرایش
+          </Typography>
         </Button>
         <Button sx={deleteButton} onClick={onDelete}>
           <Delete />

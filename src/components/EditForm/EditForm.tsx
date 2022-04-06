@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import {
   Box,
   Button,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 
+import { socialTypeIdentifier } from "helpers/socialTypeIndentifier";
 import {
   root,
   rightTitles,
@@ -20,9 +21,11 @@ import {
   cancellButton,
   selectFormControl,
 } from "./editForm.styles";
+import { ISocial } from "typescript";
 
 interface IEditFormProps {
   collapse: () => void;
+  social: ISocial;
 }
 
 interface IFormValues {
@@ -31,15 +34,23 @@ interface IFormValues {
   edit_id: string;
 }
 
-const EditForm: FC<IEditFormProps> = ({ collapse }) => {
+const EditForm: FC<IEditFormProps> = ({ collapse, social }) => {
   const formik = useFormik({
     initialValues: {
-      edit_type: "",
-      edit_url: "",
-      edit_id: "",
+      edit_type: socialTypeIdentifier(social.social_link),
+      edit_url: social.social_link,
+      edit_id: social.social_id,
     },
     onSubmit: (values: IFormValues) => {},
   });
+
+  useEffect(() => {
+    formik.setValues({
+      edit_type: socialTypeIdentifier(social.social_link),
+      edit_url: social.social_link,
+      edit_id: social.social_id,
+    });
+  }, [social]);
 
   return (
     <Paper sx={root}>
