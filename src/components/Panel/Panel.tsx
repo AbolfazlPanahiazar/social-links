@@ -1,7 +1,9 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Box, Typography, Paper, Collapse, Button } from "@mui/material";
 import { Add, Edit } from "@mui/icons-material";
 
+import { ISocial } from "typescript";
+import { getSocials } from "api";
 import {
   root,
   rightTitles,
@@ -18,6 +20,21 @@ import SocialLinkItem from "components/SocialLinkItem/SocialLinkItem";
 
 const Panel: FC = () => {
   const [formState, setFormState] = useState<"add" | "edit" | "none">("none");
+  const [socials, setSocials] = useState<ISocial[]>([]);
+
+  const fetchSocials = () => {
+    getSocials()
+      .then((res) => {
+        setSocials(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    fetchSocials();
+  }, []);
 
   return (
     <Box sx={root}>
@@ -76,7 +93,9 @@ const Panel: FC = () => {
             <EditForm collapse={() => setFormState("none")} />
           </Collapse>
           <Box mt={3}>
-            <SocialLinkItem />
+            {socials.map((i) => (
+              <SocialLinkItem key={i.id} social={i} />
+            ))}
           </Box>
         </Paper>
       </Box>

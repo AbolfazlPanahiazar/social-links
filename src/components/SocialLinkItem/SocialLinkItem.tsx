@@ -13,8 +13,13 @@ import {
   keyValueWrapper,
   buttonsWrapper,
 } from "./socialLinkItem.stylese";
+import { ISocial } from "typescript";
 
-const SocialLinkItem: FC = () => {
+interface ISocialLinkItem {
+  social: ISocial;
+}
+
+const SocialLinkItem: FC<ISocialLinkItem> = ({ social }) => {
   return (
     <Paper sx={root}>
       <Box sx={wrapper}>
@@ -31,7 +36,7 @@ const SocialLinkItem: FC = () => {
             آی دی (ID):
           </Typography>
           <Typography fontSize={14} sx={leftAlignText}>
-            @mhosseintaher
+            {social.social_id}
           </Typography>
         </Box>
         <Box sx={keyValueWrapper}>
@@ -39,7 +44,7 @@ const SocialLinkItem: FC = () => {
             لینک:
           </Typography>
           <Typography fontSize={14} sx={leftAlignText} color="orange">
-            https://twitter.com/mhosseintaher
+            {social.social_link}
           </Typography>
         </Box>
       </Box>
