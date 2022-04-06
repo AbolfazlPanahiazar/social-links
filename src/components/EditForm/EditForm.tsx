@@ -21,13 +21,17 @@ import {
   selectFormControl,
 } from "./editForm.styles";
 
+interface IEditFormProps {
+  collapse: () => void;
+}
+
 interface IFormValues {
   edit_type: string;
   edit_url: string;
   edit_id: string;
 }
 
-const EditForm: FC = () => {
+const EditForm: FC<IEditFormProps> = ({ collapse }) => {
   const formik = useFormik({
     initialValues: {
       edit_type: "",
@@ -84,7 +88,7 @@ const EditForm: FC = () => {
         <Button variant="contained" color="warning">
           ویرایش مسیر ارتباطی
         </Button>
-        <Button variant="outlined" sx={cancellButton}>
+        <Button variant="outlined" sx={cancellButton} onClick={collapse}>
           انصراف
         </Button>
       </Box>

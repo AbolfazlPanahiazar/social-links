@@ -36,3 +36,7 @@ export const panelStateIcon: SxProps<Theme> = (theme: Theme) => ({
 export const primaryText: SxProps<Theme> = (theme: Theme) => ({
   color: theme.palette.text.primary,
 });
+
+export const formStateButton: SxProps<Theme> = (theme: Theme) => ({
+  color: theme.palette.warning.main,
+});

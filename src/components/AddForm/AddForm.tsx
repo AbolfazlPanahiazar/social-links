@@ -21,13 +21,17 @@ import {
   selectFormControl,
 } from "./addForm.styles";
 
+interface IAddFormProps {
+  collapse: () => void;
+}
+
 interface IFormValues {
   add_type: string;
   add_url: string;
   add_id: string;
 }
 
-const AddForm: FC = () => {
+const AddForm: FC<IAddFormProps> = ({ collapse }) => {
   const formik = useFormik({
     initialValues: {
       add_type: "",
@@ -36,6 +40,11 @@ const AddForm: FC = () => {
     },
     onSubmit: (values: IFormValues) => {},
   });
+
+  const cancellHandler = () => {
+    formik.resetForm();
+    collapse();
+  };
 
   return (
     <Paper sx={root}>
@@ -84,7 +93,7 @@ const AddForm: FC = () => {
         <Button variant="contained" color="warning">
           ثبت مسیر ارتباطی
         </Button>
-        <Button variant="outlined" sx={cancellButton}>
+        <Button variant="outlined" sx={cancellButton} onClick={cancellHandler}>
           انصراف
         </Button>
       </Box>
