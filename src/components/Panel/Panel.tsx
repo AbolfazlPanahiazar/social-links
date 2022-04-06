@@ -17,10 +17,12 @@ import {
 import AddForm from "components/AddForm/AddForm";
 import EditForm from "components/EditForm/EditForm";
 import SocialLinkItem from "components/SocialLinkItem/SocialLinkItem";
+import ConfirmDeleteModal from "components/ConfirmDeleteModal/ConfirmDeleteModal";
 
 const Panel: FC = () => {
   const [formState, setFormState] = useState<"add" | "edit" | "none">("none");
   const [socials, setSocials] = useState<ISocial[]>([]);
+  const [deletingSocial, setDeletingSocial] = useState<ISocial | null>(null);
 
   const fetchSocials = () => {
     getSocials()
@@ -94,11 +96,26 @@ const Panel: FC = () => {
           </Collapse>
           <Box mt={3}>
             {socials.map((i) => (
-              <SocialLinkItem key={i.id} social={i} />
+              <SocialLinkItem
+                key={i.id}
+                social={i}
+                onDelete={() => {
+                  setDeletingSocial(i);
+                }}
+              />
             ))}
           </Box>
         </Paper>
       </Box>
+
+      <ConfirmDeleteModal
+        id={deletingSocial?.id || ""}
+        close={() => {
+          setDeletingSocial(null);
+        }}
+        open={!!deletingSocial?.id}
+        social_id={deletingSocial?.social_id || ""}
+      />
     </Box>
   );
 };

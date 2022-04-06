@@ -1,8 +1,12 @@
 import { FC } from "react";
 import { Paper, Typography, Box, Button } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
-import { Twitter } from "@mui/icons-material";
 
+import LogoGenerator from "helpers/LogoGenerator";
+import {
+  socialTypeTitle,
+  socialTypeIdentifier,
+} from "helpers/socialTypeIndentifier";
 import {
   root,
   wrapper,
@@ -17,18 +21,19 @@ import { ISocial } from "typescript";
 
 interface ISocialLinkItem {
   social: ISocial;
+  onDelete: () => void;
 }
 
-const SocialLinkItem: FC<ISocialLinkItem> = ({ social }) => {
+const SocialLinkItem: FC<ISocialLinkItem> = ({ social, onDelete }) => {
   return (
     <Paper sx={root}>
       <Box sx={wrapper}>
         <Box ml={2}>
-          <Twitter sx={text} />
+          <LogoGenerator logo={socialTypeIdentifier(social.social_link)} />
         </Box>
         <Box ml={2}>
           <Typography fontSize={14} sx={text}>
-            توییتر
+            {socialTypeTitle(social.social_link)}
           </Typography>
         </Box>
         <Box sx={keyValueWrapper}>
@@ -53,7 +58,7 @@ const SocialLinkItem: FC<ISocialLinkItem> = ({ social }) => {
           <Edit />
           <Typography fontSize={14}>ویرایش</Typography>
         </Button>
-        <Button sx={deleteButton}>
+        <Button sx={deleteButton} onClick={onDelete}>
           <Delete />
           <Typography fontSize={14}>حذف</Typography>
         </Button>
