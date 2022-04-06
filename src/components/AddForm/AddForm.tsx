@@ -43,7 +43,8 @@ const AddForm: FC<IAddFormProps> = ({ collapse }) => {
       if (values.add_id && values.add_type && values.add_url) {
         addSocial(values.add_id, values.add_url)
           .then((res) => {
-            console.log(res);
+            formik.resetForm();
+            collapse();
           })
           .catch(() => {});
       }

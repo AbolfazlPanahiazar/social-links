@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { Box, Button, Dialog, TextField, Typography } from "@mui/material";
+import { useFormik } from "formik";
 
+import { deleteSocial } from "api";
 import { root, container, buttonsContainer } from "./confirmDeleteModal.styles";
 
 interface IConfirmDeleteModalProps {
@@ -8,6 +10,11 @@ interface IConfirmDeleteModalProps {
   close: () => void;
   social_id: string;
   id: string;
+  refetch: () => void;
+}
+
+interface IFormValues {
+  taeed: string;
 }
 
 const ConfirmDeleteModal: FC<IConfirmDeleteModalProps> = ({
@@ -15,8 +22,22 @@ const ConfirmDeleteModal: FC<IConfirmDeleteModalProps> = ({
   id,
   open,
   social_id,
+  refetch,
 }) => {
-  const deleteHandler = () => {};
+  const formik = useFormik({
+    initialValues: {
+      taeed: "",
+    },
+    onSubmit: (values: IFormValues) => {
+      if (values.taeed && values.taeed === "تایید") {
+        deleteSocial(id);
+        close();
+        refetch();
+      } else {
+        formik.resetForm();
+      }
+    },
+  });
 
   return (
     <Dialog open={open} sx={root}>
@@ -30,13 +51,19 @@ const ConfirmDeleteModal: FC<IConfirmDeleteModalProps> = ({
           </Typography>
         </Box>
         <Box mt={2}>
-          <TextField fullWidth color="warning" />
+          <TextField
+            name="taeed"
+            fullWidth
+            color="warning"
+            value={formik.values.taeed}
+            onChange={formik.handleChange}
+          />
         </Box>
         <Box mt={2} sx={buttonsContainer}>
           <Button onClick={close} color="warning">
             انصراف
           </Button>
-          <Button onClick={deleteHandler} color="error">
+          <Button onClick={formik.submitForm} color="error">
             حذف
           </Button>
         </Box>

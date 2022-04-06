@@ -94,7 +94,12 @@ const Panel: FC = () => {
             </Typography>
           </Box>
           <Collapse in={formState === "add"}>
-            <AddForm collapse={() => setFormState("none")} />
+            <AddForm
+              collapse={() => {
+                setFormState("none");
+                fetchSocials();
+              }}
+            />
           </Collapse>
           <Collapse in={formState === "edit"}>
             <EditForm
@@ -130,6 +135,7 @@ const Panel: FC = () => {
         }}
         open={!!deletingSocial?.id}
         social_id={deletingSocial?.social_id || ""}
+        refetch={fetchSocials}
       />
     </Box>
   );
